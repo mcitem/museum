@@ -20,7 +20,7 @@ app.use(expressJWT({secret: config.jwtSecretKey}).unless({path: [/^\/api|\/uploa
 
 // 托管静态资源
 app.use('/uploads', express.static('uploads'))
-
+app.use('/web', express.static('dist'))
 
 
 // 导入并注册管理员登录路由模块
@@ -40,12 +40,21 @@ app.use('/api', announcementRouter)
 // 定义错误级别的中间件
 app.use((err, req, res, next) => {
   // 捕获身份认证失败的错误
-  if (err.name === 'UnauthorizedError') return res.send({status: 1, message: '身份认证失败'})
+  if (err.name === 'UnauthorizedError') return res.send({status: 1, message: '1身份认证失败'})
   // 未知错误
   res.send({status: 1, message: err.message})
 })
 
-// 启动服务器
-app.listen(8090, () => {
-  console.log('api server runing at http://127.0.0.1:8090')
+// // 启动服务器
+// app.listen(8090, () => {
+//   console.log('api server runing at http://127.0.0.1:8090')
+// })
+
+const https = require('https')
+const fs = require('fs')
+const privateKey = fs.readFileSync('/var/ssl/mc.mcitem.com', 'utf8')
+const certificate = fs.readFileSync('/var/ssl/mc.mcitem.com', 'utf8')
+const httpsServer = https.createServer({key: privateKey, cert: certificate}, app)
+httpsServer.listen(443,'0.0.0.0', () => {
+  console.log('RUN')
 })
