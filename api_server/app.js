@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: false }))
 const expressJWT = require('express-jwt')
 const config = require('./config')
 // 声明：为增强前后台接口通用性，设置所有接口都不用携带token
-app.use(expressJWT({secret: config.jwtSecretKey}).unless({path: [/^\/api|\/uploads/]}))
+app.use(expressJWT({secret: config.jwtSecretKey}).unless({path: [/^\/api/, /^\/uploads/, /^\/web/]}))
 
 // 托管静态资源
 app.use('/uploads', express.static('uploads'))
@@ -52,8 +52,8 @@ app.use((err, req, res, next) => {
 
 const https = require('https')
 const fs = require('fs')
-const privateKey = fs.readFileSync('/var/ssl/mc.mcitem.com', 'utf8')
-const certificate = fs.readFileSync('/var/ssl/mc.mcitem.com', 'utf8')
+const privateKey = fs.readFileSync('/var/ssl/mc.mcitem.com.key', 'utf8')
+const certificate = fs.readFileSync('/var/ssl/mc.mcitem.com.pem', 'utf8')
 const httpsServer = https.createServer({key: privateKey, cert: certificate}, app)
 httpsServer.listen(443,'0.0.0.0', () => {
   console.log('RUN')
