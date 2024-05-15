@@ -10,18 +10,18 @@ import './assets/css/global.css'
 import 'default-passive-events'
 
 // 上传图片地址
-// Vue.prototype.$uploadUrl = 'http://micefind.com:8090/api/upload'
-Vue.prototype.$uploadUrl = 'http://127.0.0.1:8090/api/upload'
+Vue.prototype.$uploadUrl = 'https://mc.mcitem.com/api/upload'
+// Vue.prototype.$uploadUrl = 'http://127.0.0.1:8090/api/upload'
 
 // 图片显示基准地址
-// Vue.prototype.$picBaseUrl = 'http://micefind.com:8090'
-Vue.prototype.$picBaseUrl = 'http://127.0.0.1:8090'
+Vue.prototype.$picBaseUrl = 'https://mc.mcitem.com'
+// Vue.prototype.$picBaseUrl = 'http://127.0.0.1:8090'
 
 // 导入并配置 axios
 import axios from 'axios'
 // 请求基准地址
-// axios.defaults.baseURL = 'http://micefind.com:8090'
-axios.defaults.baseURL = 'http://127.0.0.1:8090'
+axios.defaults.baseURL = 'https://mc.mcitem.com'
+// axios.defaults.baseURL = 'http://127.0.0.1:8090'
 // 为 axios 设置请求拦截器
 axios.interceptors.request.use(config => {
   config.headers.Authorization = window.sessionStorage.getItem('token')

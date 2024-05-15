@@ -8,12 +8,12 @@ import { $http } from '@escook/request-miniprogram'
 
 uni.$http = $http
 // 配置请求根路径
-$http.baseUrl = 'http://127.0.0.1:8090'
-// $http.baseUrl = 'http://micefind.com:8090'
+// $http.baseUrl = 'http://127.0.0.1:8090'
+$http.baseUrl = 'https://mc.mcitem.com'
 
 // 图片显示根路径
-uni.$picBaseUrl = 'http://127.0.0.1:8090'
-// uni.$picBaseUrl = 'http://micefind.com:8090'
+// uni.$picBaseUrl = 'http://127.0.0.1:8090'
+uni.$picBaseUrl = 'https://mc.mcitem.com'
 
 // 请求开始之前
 $http.beforeRequest = function (options) {
