@@ -78,6 +78,15 @@
         } = await uni.$http.get('/api/getcol', {
           query: this.kw
         })
+		
+		// 搜索返回无结果处理
+		if (res.total == 0){uni.showToast({
+			title:'找不到结果',
+			icon:'error',
+			duration:1500
+		})}
+		
+		
         if (res.status !== 0) return uni.$showMsg()
         this.searchResults = res.colList
         // console.log(this.searchResults);
