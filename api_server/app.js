@@ -50,6 +50,7 @@ app.use((err, req, res, next) => {
 //   console.log('api server runing at http://127.0.0.1:8090')
 // })
 
+// 生产环境
 const https = require('https')
 const fs = require('fs')
 const privateKey = fs.readFileSync('/var/ssl/mc.mcitem.com.key', 'utf8')
@@ -58,3 +59,14 @@ const httpsServer = https.createServer({key: privateKey, cert: certificate}, app
 httpsServer.listen(443,'0.0.0.0', () => {
   console.log('RUN')
 })
+
+const http = require('http')
+const httpapp = express()
+httpapp.all('*', (req, res) => {
+  res.redirect(301, `https://${req.headers.host}${req.url}`);
+});
+const httpServer = http.createServer(httpapp)
+httpServer.listen(80,'0.0.0.0', () => {
+  console.log('RUN 301 http')
+})
+
